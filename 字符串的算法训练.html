@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 反转字符串
+    let str = 'caonima'
+    let res = str.split('').reverse().join('')
+    // console.log(res)
+
+    //判断回文字符串
+    let string = 'yessey'
+    function isPalindrome(str){
+        const res = str.split('').reverse().join('')
+        return str === res
+    }
+    function isPalindromeOne(str){
+        let len = str.length
+
+        for (let i = 0; i < len/2; i++) {
+           if(str[i]!==str[len-i-1]){
+               return false
+           }
+        }
+        return true
+    }
+    // console.log(isPalindrome(string),isPalindromeOne(string))
+
+    /*
+    给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+    输入: "aba"
+    输出: True
+    示例 2:
+    输入: "abca"
+    输出: True
+    解释: 你可以删除c字符。
+    注意: 字符串只包含从 a-z 的小写字母。字符串的最大长度是50000。
+    */
+
+    const validPalindrome = function(s){
+        let len = s.length
+        let i = 0,j = len-1
+        while(i<j&&s[i]===s[j]){
+            i++
+            j--
+        } 
+
+        // 左指针向后移动一个，是否是回文串
+        if(isPalindromeTwo(i+1,j)){
+            return true
+        }
+
+        //右指针向前移动一个，是否是回文串
+
+        if(isPalindromeTwo(i,j-1)){
+            return true
+        }
+
+        // 工具方法，判断是否是回文字符串
+        function isPalindromeTwo(start,end){
+            while(start<end) {
+                if(s[start]!==s[end]) {
+                    return false
+                }
+                start++
+                end--
+            }
+            return true
+        }
+    }
+    // console.log(validPalindrome('abcdba'))
+
+
+    /*
+    设计一个支持以下两种操作的数据结构：
+    void addWord(word)
+    bool search(word)
+    search(word) 可以搜索文字或正则表达式字符串，字符串只包含字母 . 或 a-z 。
+    . 可以表示任何一个字母。
+
+    addWord("bad")
+    addWord("dad")
+    addWord("mad")
+    search("pad") -> false
+    search("bad") -> true
+    search(".ad") -> true
+    search("b..") -> true
+    说明:
+    你可以假设所有单词都是由小写字母 a-z 组成的。
+    */
+
+    const WordDictionary = function () {
+        this.worlds = {}
+    }
+
+    WordDictionary.prototype.addWord = function(str){
+        let len = str.length
+        if(this.worlds[len]) {
+            this.worlds[len].push(str)
+        }else {
+            this.worlds[len] = [str]
+        }
+    }
+
+    WordDictionary.prototype.search = function(world){
+        let len = world.length
+        if(!this.worlds[len]) return false
+
+        if(!world.includes('.')) return this.worlds[len].includes(world)
+
+
+        const reg = new RegExp(world)
+        
+        return this.worlds[len].some(item=> reg.test(item))
+    }
+
+    let searchStr = new WordDictionary()
+    searchStr.addWord('wqsafdsafagf')
+    searchStr.addWord('wqsaf')
+    searchStr.addWord('wq')
+    searchStr.addWord('wqsa')
+    console.log(searchStr.search('.'))
+    // console.log(searchStr.search('wqsafdsafagf'))
+    // console.log(searchStr.search('wqsaf'))
+    // console.log(searchStr.search('wqsa'))
+
+    const myAtoi = function(str) {
+        const reg = /\s*([-\+]?[0-9]*).*/
+         let grounp = str.match(reg)
+
+         let max = Math.pow(2,31)-1
+         let min = -max-1
+
+         let target = 0
+
+         if(grounp) {
+            target = +grounp[1]
+            if(isNaN(target)) {
+                target = 0
+            }
+         }
+
+         if(target>max) {
+             return max
+         }else if(target<min) {
+             return min
+         }
+
+         return target
+    }
+   console.log( myAtoi('-123123sd3213as'))
+</script>

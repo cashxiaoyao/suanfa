@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function NewObject(o) {
+        function F(){}
+        F.prototype = o
+        return new F()
+    }
+
+    function inheritProtoType(subType,superType){
+        // let prototype = NewObject(superType.prototype)
+        let prototype = Object.create(superType.prototype)
+        console.log(prototype.__proto__===superType.prototype,'*****')
+        prototype.constructor = subType
+        subType.prototype = prototype
+    }
+
+    function SuperType (name){
+        this.name = name
+        this.color = ['red','green','blue']
+    }
+
+    SuperType.prototype.sayName = function(){
+        console.log(this.name)
+    }
+
+    function SubType(name,age){
+        SuperType.call(this,name)
+        this.age = age
+    }
+
+    inheritProtoType(SubType,SuperType)
+
+    SubType.prototype.sayAge = function(){
+        console.log(this.age)
+    }
+
+    let superGodOne = new SubType()
+    let superGodTwo = Object.create(SubType.prototype)
+    console.log(superGodTwo.__proto__=== superGodOne.__proto__,'+++++++')
+    console.log(superGodOne.__proto__.__proto__== SuperType.prototype)
+    console.log(superGodOne.__proto__.constructor==SubType)
+    console.log(SubType.prototype==SuperType.prototype)
+    console.log(SuperType.prototype.constructor==SuperType)
+    console.log(superGodOne.__proto__)
+    console.log(SuperType.prototype)
+
+    // console.log(superGodOne.__proto__== SuperType.prototype)
+    // console.log(SuperType.prototype)
+    // console.log(SuperType.prototype.constructor)
+
+</script>

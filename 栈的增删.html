@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+/*
+栈数据结构：栈是一种后进先出的数据结构。
+具备两个特证：
+1. 只允许从尾部添加元素
+2. 只允许从尾部去除元素
+
+对应到数组的方法，刚好就是 push 和 pop。因此，我们可以认为在 JavaScript 中，栈就是限制只能用 push 来添加元素，同时只能用 pop 来移除元素的一种特殊的数组。
+*/
+let stack = []
+// 入栈过程
+stack.push('东北大板')
+stack.push('可爱多')
+stack.push('巧乐兹')
+stack.push('冰工厂')
+stack.push('光明奶砖')
+let len = stack.length
+// 出栈过程
+while(len) {
+    //单纯访问栈顶元素
+    const top = stack[len-1]
+    // 将栈顶元素出栈
+    stack.pop()
+}
+
+</script>

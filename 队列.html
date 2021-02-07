@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    /*
+    队列是一种先进先出的数据结构
+    具备以下规律：
+    1.只允许从尾部添加元素
+    2.只允许从头部移除元素
+    也就是说这个过程只涉及了数据的push和shift方法
+
+    在栈元素出栈时，我们关心的是栈顶元素（数组的最后一个元素），队列元素出队时，我们只关心队列的对头元素（数组的第一个元素）
+    
+    */
+
+   let queue = []
+
+   queue.push('美女1号')
+   queue.push('美女2号')
+   queue.push('美女2号')
+
+   let len = queue.length
+
+   while (len){
+       //单纯访问队头元素，不出队列
+        const top = queue[0]
+
+        queue.shift()
+   }
+</script>

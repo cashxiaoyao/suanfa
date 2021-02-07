@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    /*
+    链表和数组相似，它们都是有序的列表、都是线性结构（有且仅有一个前驱、有且仅有一个后继）。不同点在于，链表中，数据单位的名称叫做“结点”，而结点和结点的分布，在内存中可以是离散的。
+
+    在链表中，每个结点的结构都包括了两部分的内容：数据域和指针域，js中的链表，是以嵌套的对象形式来实现的。
+    数据域存储的是当前结点所存储的数据值，而指针域则代表下一个结点（后续结点）的引用。
+
+    要想访问链表中的任何一个元素，我们都得从起点结点开始，逐个访问 next，一直访问到目标结点为止。为了确保起点结点是可抵达的，我们有时还会设定一个 head 指针来专门指向链表的开始位置
+    */
+
+   //创建链表结点，需要借助构造函数
+   function ListNode(val){
+        this.value =val
+        this.next = null
+   }
+//创建有两个结点的链表开始
+  const node = new ListNode(1)
+  node.next =  new ListNode(2)
+  //创建有两个结点的链表结束
+
+  //在这个链表中插入一个结点开始
+  const node3 = new ListNode(3)
+  node3.next = node.next
+  node.next = node3
+   //在这个链表中插入一个结点结束
+
+//删除node3在链表中的位置
+   const target = node.next  // node3的位置
+   //改变node的指针指向node2
+   node.next = target.next
+</script>
