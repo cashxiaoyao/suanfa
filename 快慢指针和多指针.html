@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    /*
+    给定一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+
+    实列：
+    给定一个链表: 1->2->3->4->5, 和 n = 2.
+    当删除了倒数第二个结点后，链表变为 1->2->3->5.
+    */
+    function ListNode(val){
+        this.value = val
+        this.next = null
+    }
+    const removeNthFromEnd = function(head, n) {
+        let dummy = new ListNode()
+
+        dummy.next = head
+
+        let fast = dummy
+        let slow = dummy
+
+        //快指针先走到n的位置
+        while(n!==0){
+            fast = fast.next
+            n--
+        }
+
+        //快慢指针一起走
+        while(fast.next){
+            fast = fast.next
+            slow = slow.next
+        }
+
+        slow.next = slow.next.next
+        return dummy.next
+    }
+
+    
+
+
+    /*
+    完全反转一个链表
+    定义一个函数，输入一个链表的头结点，反转该链表并输出反转后链表的头结点。
+
+    实例：
+    输入: 1->2->3->4->5->NULL
+    输出: 5->4->3->2->1->NULL
+    
+    */
+
+    const reverseList = function(head) {
+        //定义前驱结点
+        let pre = null
+
+        //定义目标节点，初始化的时候设置为头结点
+        let cur = head
+
+        while(cur!==null) {
+            let  next = cur.next
+            cur.next = pre
+
+            pre = cur
+            cur = next
+        }
+        //反转结束之后，cur变成null,定义的前驱结点就变成头结点了
+        return pre
+    }
+
+
+
+    /*
+     局部反转一个链表：
+     反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+     输入: 1->2->3->4->5->NULL, m = 2, n = 4
+    输出: 1->4->3->2->5->NULL
+    */
+    /*
+        就是把m和n之间的链表当成一个完整的链表反转，然后把这个链表反转之后的新链表的头结点的next指向m-1位置的结点，m位置的结点的next指向n+1位置的结点
+    */
+    const reverseBetween = function(head, m, n) {
+        //定义区间链表的前驱结点leftHead
+        let pre,cur,leftHead
+
+        let dummy = new ListNode()
+        dummy.next = head
+
+        let p = dummy  //p是一个游标  用于遍历用
+        //先找到区间链表的前驱结点 p走到m-1的位置就是区间链表的前驱结点
+        for (let i = 0; i < m-1; i++) {
+            p = p.next
+        }
+
+        leftHead = p
+
+        let start = leftHead.next // 区间链表的头结点
+
+        pre = start
+
+        cur = pre.next
+
+        //反转区间链表
+        for (let i = m; i < n; i++) {
+            let next = cur.next
+            cur.next = pre
+            pre = cur
+            cur = next
+        }
+
+        leftHead.next = pre
+
+        start.next = cur
+
+        return dummy.next
+
+    }
+</script>

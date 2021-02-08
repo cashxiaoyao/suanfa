@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+/**
+ * 给定一个链表，判断链表中是否有环:
+ * 输入：[3,2,0,4]（链表结构如下图） 输出：true
+    解释：链表中存在一个环
+ * 
+ * **/
+    function ListNode(val){
+        this.value = val
+        this.next = null
+    }
+
+    const hasCycle = function(head) {
+        while(head) {
+            if(head.flag) {
+                return true
+            }else {
+                head.flag = true
+                head = head.next // 向下走一步
+            }
+        }
+        return false
+    }
+
+
+    /**环形链表衍生问题——定位环的起点:
+     * 给定一个链表，返回链表开始入环的第一个结点。 如果链表无环，则返回 null。
+    */
+    const detectCycle = function(head) {
+        while(head) {
+            if(head.flag) {
+                return head
+            }else {
+                head.flag = true
+                head = head.next
+            }
+        }
+        return null
+    }
+</script>
