@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+/*
+    防抖（debounce）
+    指触发事件后n秒后才执行函数，如果再n秒内重复触发事件，则会重新计算函数执行事件
+*/
+
+// 1.非立即执行版：
+function debounce1(fn,delay){
+    let timer;
+    return function(){
+        const cxt = this
+        const args = [...arguments]
+        if(timer) clearTimeout(timer)
+        timer = setTimeout(()=>{
+            fn.apply(cxt,args)
+        },delay)
+    }
+}
+
+//2.立即执行版
+function debounce2(fn,delay) {
+    let timer;
+    return function(){
+        const ctx = this
+        const args = [...arguments]
+        if(timer) clearTimeout(timer)
+        const now = !timer
+        timer = setTimeout(()=>{
+            timer = null
+        },delay)
+        if(now) fn.apply(ctx,args)
+    }
+}
+//3.终极版本  immediate是指是否立即执行
+function debounce(fn,delay,immediate){
+    let timer;
+    return function(){
+        const ctx = this
+        const args = [...arguments]
+        if(timer) clearTimeout(timer)
+        if(immediate) {
+            const now = !timer
+            timer = setTimeout(()=>{
+                timer = null
+            },delay)
+            if(now) fn.apply(ctx,args)
+            return 
+        }
+        timer = setTimeout(()=>{
+            fn.apply(ctx,args)
+        },delay)
+    }
+}
+
+</script>
